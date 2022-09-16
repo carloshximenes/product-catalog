@@ -1,0 +1,50 @@
+.product {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  border-radius: 12px;
+  padding: 24px;
+  gap: 16px;
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-self: stretch;
+    padding-top: 16px;
+    &__name {
+      font-size: 24px;
+      font-weight: 700;
+      color: dimgray;
+    }
+    &__prices {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+      &__currentPrice {
+        font-size: 24px;
+        color: dimgray;
+        font-weight: 700;
+      }
+      &__retailPrice {
+        font-size: 16px;
+        color: dimgray;
+        font-weight: 700;
+        text-decoration-line: line-through;
+      }
+    }
+  }
+  &__viewDetails {
+    margin-left: auto;
+    align-self: center;
+    button {
+      background-color: lawngreen;
+      color: white;
+      padding: 12px 8px;
+      border: 1px solid green;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 160px;
+    }
+  }
+}

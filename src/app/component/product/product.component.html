@@ -1,0 +1,19 @@
+<div class="product">
+  <img *ngIf="data.PictureURL" [src]="data.ThumbnailURL" />
+  <div class="product__info">
+    <span class="product__info__name">
+      {{ data.Name }}
+    </span>
+    <div class="product__info__prices">
+      <span class="product__info__prices__currentPrice">${{ data.Price }}</span>
+      <span
+        class="product__info__prices__retailPrice"
+        *ngIf="data['Retail Price']"
+        >${{ data["Retail Price"] }}</span
+      >
+    </div>
+  </div>
+  <div class="product__viewDetails">
+    <button (click)="viewDetailsHandler()">View Details</button>
+  </div>
+</div>

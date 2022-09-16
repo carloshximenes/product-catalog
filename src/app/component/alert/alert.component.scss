@@ -1,0 +1,19 @@
+.alert {
+  position: absolute;
+  top: 0px;
+  width: 100vw;
+  display: flex;
+  place-content: center;
+  p {
+    background-color: lightgreen;
+    color: white;
+    font-size: 24px;
+    padding: 16px 32px;
+    opacity: 0.8;
+    border: 1px solid green;
+    margin: 0px;
+    width: 70%;
+    text-align: center;
+    z-index: 1;
+  }
+}
