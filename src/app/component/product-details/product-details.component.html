@@ -1,39 +1,39 @@
 <section>
   <div class="details">
     <div class="details__image">
-      <img [src]="data.PictureURL" [alt]="data.Name" />
-      <div class="details__image__badges" *ngIf="data.Badges">
-        <span *ngFor="let badge of convertToArray(data.Badges)">{{
+      <img [src]="data.pictureUrl" [alt]="data.name" />
+      <div class="details__image__badges" *ngIf="data.badges">
+        <span *ngFor="let badge of convertToArray(data.badges)">{{
           badge
         }}</span>
       </div>
     </div>
     <div class="details__infos">
-      <span class="details__infos__name">{{ data.Name }}</span>
-      <span class="details__infos__rating">
-        <i *ngFor="let star of stars" [ngClass]="star"></i>
+      <span class="details__infos__name">{{ data.name }}</span>
+      <span class="details__infos__rating" *ngIf="data.ratingAvg">
+        <i *ngFor="let star of getStars(data.ratingAvg)" [ngClass]="star"></i>
       </span>
-      <span class="details__infos__description">{{ data.Description }}</span>
+      <span class="details__infos__description">{{ data.description }}</span>
     </div>
     <div class="details__shopping">
       <div class="details__shopping__prices">
         <span class="details__shopping__prices__currentPrice"
-          >${{ data.Price }}</span
+          >${{ data.price }}</span
         >
         <span
-          *ngIf="data['Retail Price']"
+          *ngIf="data.retailPrice"
           class="details__shopping__prices__retailPrice"
-          >${{ data["Retail Price"] }}</span
+          >${{ data.retailPrice }}</span
         >
       </div>
       <div class="details__shopping__cart">
-        <span *ngIf="data.Stock <= 0">Out of Stock</span>
+        <span *ngIf="data.stock <= 0">Out of Stock</span>
         <button (click)="addToCartHandler()">Add to Cart</button>
       </div>
     </div>
   </div>
   <div class="details__more">
-    <span><b>Brand:</b>{{ data.Brand }}</span>
-    <span><b>Color:</b>{{ convertToArray(data.Color).join(", ") }}</span>
+    <span><b>Brand:</b> {{ data.brand }}</span>
+    <span><b>Color:</b> {{ convertToArray(data.color).join(", ") }}</span>
   </div>
 </section>

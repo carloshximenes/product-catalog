@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
+import { Product } from 'src/app/interface/product.interface';
 import { AlertService } from '../alert/alert.service';
-import * as data from './../../data/productList.json';
+import { ProductDetailsService } from './product-details.service';
 
 @Component({
   selector: 'app-product-details',
@@ -10,34 +11,48 @@ import * as data from './../../data/productList.json';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  public DUMMY_DATA: any = (data as any).default;
-  public data: any;
-  public stars: Array<string> = [];
+  public data!: Product;
 
   constructor(
     private _route: ActivatedRoute,
-    private _alertService: AlertService
+    private _alertService: AlertService,
+    private _service: ProductDetailsService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
     this._route.params.pipe(take(1)).subscribe((params) => {
-      this.getProductData(+params['id']);
+      this._getProductData(+params['id']);
     });
   }
 
-  private getProductData(id: number): void {
-    this.data = this.DUMMY_DATA.find((item: any) => item.ProductID === id);
-    this.setTotalStars(this.data.RatingAvg);
+  private _getProductData(id: number): void {
+    this._service
+      .getProductBy(id)
+      .pipe(take(1))
+      .subscribe((product) => {
+        if (product) {
+          this.data = product;
+        } else {
+          this._itemNotFounded();
+        }
+      });
   }
 
-  private setTotalStars(rating: number = 0): void {
-    this.stars = Array(Math.floor(rating)).fill('fa-solid fa-star');
-    if (this.stars.length < rating) {
-      this.stars.push('fa-solid fa-star-half');
+  private _itemNotFounded(): void {
+    this._router.navigate(['/item-not-founded']);
+  }
+
+  public getStars(rating: number = 0): string[] {
+    let stars = Array(Math.floor(rating)).fill('fa-solid fa-star');
+    if (stars.length < rating) {
+      stars.push('fa-solid fa-star-half');
     }
-    while (this.stars.length < 5) {
-      this.stars.push('fa-regular fa-star');
+    while (stars.length < 5) {
+      stars.push('fa-regular fa-star');
     }
+
+    return stars;
   }
 
   public convertToArray(text: string, separator: string = '|'): string[] {

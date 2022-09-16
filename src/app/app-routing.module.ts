@@ -15,7 +15,13 @@ const routes: Routes = [
       ),
   },
   { path: '', redirectTo: 'catalog', pathMatch: 'full' },
-  { path: '**', redirectTo: 'catalog' },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./component/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -6,10 +6,10 @@ import { DataService } from 'src/app/services/data.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CatalogService {
+export class ProductDetailsService {
   constructor(private _dataService: DataService) {}
 
-  public getAllProducts(): Observable<Product[]> {
-    return this._dataService.getAll();
+  public getProductBy(id: number): Observable<Product | null> {
+    return this._dataService.getBy(id);
   }
 }
